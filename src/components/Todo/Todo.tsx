@@ -26,7 +26,7 @@ const Todo: FC<Props> = ({ todo }) => {
   );
 };
 
-// Styled
+// Styles
 
 const StyledView = styled.View`
   background: #018c9b;
