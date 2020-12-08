@@ -1,10 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { Text } from 'react-native';
-import {
-  FlatList,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { todoReducer } from '../../reducers/todoReducer';
 import { TypeTodo } from '../../types/todoTypes';
 import styled from 'styled-components/native';
@@ -33,6 +28,12 @@ const Todos = () => {
       });
     }
     setInputText('');
+  };
+  const removeTodo = (id: number) => {
+    dispatch({
+      type: 'REMOVE',
+      payload: id,
+    });
   };
 
   React.useEffect(() => {
@@ -74,7 +75,9 @@ const Todos = () => {
       <FlatList
         data={todos}
         keyExtractor={(item) => JSON.stringify(item.id)}
-        renderItem={(objectThingy) => <Todo todo={objectThingy.item} />}
+        renderItem={(objectThingy) => (
+          <Todo removeTodo={removeTodo} todo={objectThingy.item} />
+        )}
       />
     </StyledContainer>
   );

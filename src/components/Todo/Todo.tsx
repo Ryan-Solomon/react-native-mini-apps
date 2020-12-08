@@ -6,15 +6,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type Props = {
   todo: TypeTodo;
+  removeTodo: (id: number) => void;
 };
 
-const Todo: FC<Props> = ({ todo }) => {
+const Todo: FC<Props> = ({ todo, removeTodo }) => {
   return (
     <StyledView>
       <StyledTitleAndButtonContainer>
         <StyledTitle>{todo.title}</StyledTitle>
         <StyledButtonContainer>
-          <StyledButton>
+          <StyledButton onPress={() => removeTodo(todo.id)}>
             <Text>Remove</Text>
           </StyledButton>
           <StyledButton>

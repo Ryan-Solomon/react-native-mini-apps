@@ -8,7 +8,7 @@ export function todoReducer(
     case 'ADD':
       return [...state, action.payload];
     case 'REMOVE':
-      return [];
+      return [...state.filter((todo) => todo.id !== action.payload)];
     case 'COMPLETE':
       return [];
     case 'UNCOMPLETE':
