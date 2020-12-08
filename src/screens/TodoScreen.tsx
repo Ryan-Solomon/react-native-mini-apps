@@ -10,5 +10,3 @@ const TodoScreen = () => {
 };
 
 export default TodoScreen;
-
-const styles = StyleSheet.create({});
