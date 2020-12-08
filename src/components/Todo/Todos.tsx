@@ -8,6 +8,7 @@ import {
 import { todoReducer } from '../../reducers/todoReducer';
 import { TypeTodo } from '../../types/todoTypes';
 import styled from 'styled-components/native';
+import Todo from './Todo';
 
 // Initial State
 
@@ -48,7 +49,7 @@ const Todos = () => {
       <FlatList
         data={todos}
         keyExtractor={(item) => JSON.stringify(item.id)}
-        renderItem={(objectThingy) => <Text>{objectThingy.item.title}</Text>}
+        renderItem={(objectThingy) => <Todo todo={objectThingy.item} />}
       />
     </StyledContainer>
   );
