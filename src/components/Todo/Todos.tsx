@@ -1,11 +1,19 @@
 import React, { useReducer, useState } from 'react';
 import { Text } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
 import { todoReducer } from '../../reducers/todoReducer';
 import { TypeTodo } from '../../types/todoTypes';
 import styled from 'styled-components/native';
 
+// Initial State
+
 export const initialTodoState: TypeTodo[] = [];
+
+// Component
 
 const Todos = () => {
   const [todos, dispatch] = useReducer(todoReducer, initialTodoState);
@@ -22,6 +30,7 @@ const Todos = () => {
         },
       });
     }
+    setInputText('');
   };
 
   return (
@@ -36,11 +45,14 @@ const Todos = () => {
       <StyledButton onPress={addTodo} title='Add'>
         <Text>Add Todo</Text>
       </StyledButton>
+      <FlatList
+        data={todos}
+        keyExtractor={(item) => JSON.stringify(item.id)}
+        renderItem={(objectThingy) => <Text>{objectThingy.item.title}</Text>}
+      />
     </StyledContainer>
   );
 };
-
-export default Todos;
 
 // Styles
 
@@ -66,3 +78,11 @@ const StyledInput = styled.TextInput`
   width: 60vw;
   margin: 0.3rem 0;
 `;
+
+const StyledFlatList = styled(FlatList as new () => FlatList<TypeTodo>)`
+  background-color: #f7f7f7;
+`;
+
+// Export
+
+export default Todos;

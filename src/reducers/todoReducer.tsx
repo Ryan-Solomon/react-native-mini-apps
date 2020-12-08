@@ -6,7 +6,7 @@ export function todoReducer(
 ): TypeTodo[] {
   switch (action.type) {
     case 'ADD':
-      return [];
+      return [...state, action.payload];
     case 'REMOVE':
       return [];
     case 'COMPLETE':
