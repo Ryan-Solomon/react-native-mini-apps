@@ -15,7 +15,7 @@ const Stack = createStackNavigator<RootParamList>();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Todo'>
         <Stack.Screen
           name='Home'
           component={HomeScreen}
