@@ -35,6 +35,28 @@ const Todos = () => {
     setInputText('');
   };
 
+  React.useEffect(() => {
+    let todos = localStorage.getItem('todos');
+    if (todos) {
+      const parsedTodos: TypeTodo[] = JSON.parse(todos);
+      parsedTodos.forEach((todo) => {
+        dispatch({
+          type: 'ADD',
+          payload: {
+            title: todo.title,
+            completed: todo.completed,
+            id: todo.id,
+          },
+        });
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.removeItem('todos');
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <StyledContainer>
       <StyledTitle>Todo List</StyledTitle>
