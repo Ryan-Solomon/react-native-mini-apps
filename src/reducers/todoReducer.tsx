@@ -13,6 +13,8 @@ export function todoReducer(
       return [];
     case 'UNCOMPLETE':
       return [];
+    case 'CLEAR':
+      return [];
     default:
       throw new Error(`Action is not supported`);
   }

@@ -20,4 +20,7 @@ export type TypeTodoAction =
   | {
       type: 'UNCOMPLETE';
       payload: number;
+    }
+  | {
+      type: 'CLEAR';
     };

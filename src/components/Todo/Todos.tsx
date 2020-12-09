@@ -36,6 +36,12 @@ const Todos = () => {
     });
   };
 
+  const clearTodos = () => {
+    dispatch({
+      type: 'CLEAR',
+    });
+  };
+
   React.useEffect(() => {
     let todos = localStorage.getItem('todos');
     if (todos) {
@@ -76,7 +82,11 @@ const Todos = () => {
         data={todos}
         keyExtractor={(item) => JSON.stringify(item.id)}
         renderItem={(objectThingy) => (
-          <Todo removeTodo={removeTodo} todo={objectThingy.item} />
+          <Todo
+            clearTodos={clearTodos}
+            removeTodo={removeTodo}
+            todo={objectThingy.item}
+          />
         )}
       />
     </StyledContainer>
