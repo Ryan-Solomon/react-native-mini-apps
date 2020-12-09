@@ -5,17 +5,19 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
+import CounterScreen from './src/screens/CounterScreen';
 
 export type RootParamList = {
   Home: undefined;
   Todo: undefined;
+  Counter: undefined;
 };
 const Stack = createStackNavigator<RootParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Todo'>
+      <Stack.Navigator initialRouteName='Counter'>
         <Stack.Screen
           name='Home'
           component={HomeScreen}
@@ -25,6 +27,11 @@ export default function App() {
           name='Todo'
           component={TodoScreen}
           options={{ title: 'Todos' }}
+        />
+        <Stack.Screen
+          name='Counter'
+          component={CounterScreen}
+          options={{ title: 'Counter' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

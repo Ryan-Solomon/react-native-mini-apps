@@ -10,7 +10,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   return (
     <View>
       <Text>Home Screen</Text>
-      <Button title='Go To Todos' onPress={() => navigation.navigate('Todo')} />
+      <Button title='Todos' onPress={() => navigation.navigate('Todo')} />
+      <Button title='Counter' onPress={() => navigation.navigate('Counter')} />
     </View>
   );
 };
