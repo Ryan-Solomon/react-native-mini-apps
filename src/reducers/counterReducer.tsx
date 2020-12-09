@@ -1,5 +1,3 @@
-import React from 'react';
-
 type TCountAction =
   | {
       type: 'INCREMENT';
@@ -13,7 +11,7 @@ type TCountAction =
       type: 'CLEAR';
     };
 
-const todoReducer = (state: number, action: TCountAction): number => {
+export const counterReducer = (state: number, action: TCountAction): number => {
   switch (action.type) {
     case 'INCREMENT':
       return state + action.payload;
