@@ -12,6 +12,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       <Text>Home Screen</Text>
       <Button title='Todos' onPress={() => navigation.navigate('Todo')} />
       <Button title='Counter' onPress={() => navigation.navigate('Counter')} />
+      <Button
+        title='Cocktails'
+        onPress={() => navigation.navigate('Cocktails')}
+      />
     </View>
   );
 };
