@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { View } from 'react-native';
 
 const Cocktails = () => {
   const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const getThemCocktails = async () => {
+      const res = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
+      );
+      const data = await res.json();
+    };
+  });
+
+  // Add a button to update search term
+  // Then, search api based on search term and show results
 
   return (
     <StyledContainer>
