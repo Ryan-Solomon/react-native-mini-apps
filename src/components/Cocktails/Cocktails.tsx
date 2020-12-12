@@ -1,21 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import styled from 'styled-components/native';
+
+// Types
+type TDrink = {
+  idDrink: string;
+  strDrinkThumb: string;
+  strDrink: string;
+};
+
+type TInitialState = {
+  drinks: TDrink[];
+  error: string | null;
+  loading: boolean;
+};
+
+// Consts
+
+const initialState: TInitialState = {
+  drinks: [],
+  error: null,
+  loading: false,
+};
+
+// Reducer
+
+// Component
 
 const Cocktails = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const getThemCocktails = async () => {
       const res = await fetch(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
       );
-      const data = await res.json();
+      const { drinks } = await res.json();
+      setData(drinks);
     };
-  });
+    getThemCocktails();
+  }, [searchTerm]);
 
-  // Add a button to update search term
-  // Then, search api based on search term and show results
+  console.log(data);
 
   return (
     <StyledContainer>
@@ -24,6 +51,9 @@ const Cocktails = () => {
         value={searchInput}
         placeholder='Search Cocktails'
       />
+      <StyledSearchButton onPress={() => setSearchTerm(searchInput)}>
+        <StyledSearchText>Search</StyledSearchText>
+      </StyledSearchButton>
     </StyledContainer>
   );
 };
@@ -37,8 +67,18 @@ const StyledContainer = styled.View`
 const StyledTextInput = styled.TextInput`
   margin-top: 1rem;
   background: #272727;
-  width: 80vw;
+  width: 100vw;
   padding: 0.5rem;
   color: whitesmoke;
   font-size: 1.6rem;
+`;
+
+const StyledSearchButton = styled.TouchableOpacity`
+  background: #333;
+  align-self: flex-start;
+  padding: 0.5rem;
+`;
+
+const StyledSearchText = styled.Text`
+  color: white;
 `;
