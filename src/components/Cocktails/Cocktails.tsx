@@ -8,7 +8,7 @@ type TDrink = {
   strDrink: string;
 };
 
-type TInitialState = {
+type TState = {
   drinks: TDrink[];
   error: string | null;
   loading: boolean;
@@ -16,13 +16,51 @@ type TInitialState = {
 
 // Consts
 
-const initialState: TInitialState = {
+const initialState: TState = {
   drinks: [],
   error: null,
   loading: false,
 };
 
+type TAction =
+  | {
+      type: 'SET_DATA';
+      payload: TDrink[];
+    }
+  | {
+      type: 'SET_LOADING';
+    }
+  | {
+      type: 'SET_ERROR';
+      payload: string;
+    };
+
 // Reducer
+
+const reducer = (state: TState, action: TAction): TState => {
+  switch (action.type) {
+    case 'SET_DATA':
+      return {
+        loading: false,
+        error: null,
+        drinks: action.payload,
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case 'SET_ERROR':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      throw new Error('Action not supported');
+  }
+};
 
 // Component
 
@@ -41,8 +79,6 @@ const Cocktails = () => {
     };
     getThemCocktails();
   }, [searchTerm]);
-
-  console.log(data);
 
   return (
     <StyledContainer>
