@@ -71,11 +71,16 @@ const Cocktails = () => {
 
   useEffect(() => {
     const getThemCocktails = async () => {
-      const res = await fetch(
-        `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
-      );
-      const { drinks } = await res.json();
-      setData(drinks);
+      dispatch({ type: 'SET_LOADING' });
+      try {
+        const res = await fetch(
+          `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
+        );
+        const { drinks } = await res.json();
+        dispatch({ type: 'SET_DATA', payload: drinks });
+      } catch (e) {
+        dispatch({ type: 'SET_ERROR', payload: 'Error' });
+      }
     };
     getThemCocktails();
   }, [searchTerm]);
