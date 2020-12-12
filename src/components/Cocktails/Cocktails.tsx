@@ -1,5 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import styled from 'styled-components/native';
+import { Text } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler';
+import CocktailCard from './CocktailCard';
 
 // Types
 type TDrink = {
@@ -85,6 +88,13 @@ const Cocktails = () => {
     getThemCocktails();
   }, [searchTerm]);
 
+  console.log(state);
+
+  if (state.error) return <Text>Error</Text>
+  if (state.loading) return <Text>Loading</Text>
+
+  const { drinks } = state;
+
   return (
     <StyledContainer>
       <StyledTextInput
@@ -95,6 +105,16 @@ const Cocktails = () => {
       <StyledSearchButton onPress={() => setSearchTerm(searchInput)}>
         <StyledSearchText>Search</StyledSearchText>
       </StyledSearchButton>
+      <FlatList
+      
+        data={drinks}
+        keyExtractor={(drink) => drink.idDrink}
+        renderItem={{ item } => <CocktailCard />}}
+      // Figure this shit out
+
+      
+      
+      />
     </StyledContainer>
   );
 };
